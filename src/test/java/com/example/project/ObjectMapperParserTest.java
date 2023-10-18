@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ObjectMapperParserTest {
 
@@ -43,7 +44,7 @@ public class ObjectMapperParserTest {
 
 
 
-    /** Test 1 - Style A - COMPILER WONT ALLOW THIS
+    /** Test 1 - Style A - COMPILER WONT ALLOW THIS AND WANTS YOU TO CHANGE IT
      *  - Code never reaches the assertion line, would need a try-catch clause with assertion in catch clause
      */
     @Test
@@ -52,7 +53,7 @@ public class ObjectMapperParserTest {
         assertNull(myObject); //
     }
 
-    /** Test 1 - Style B
+    /** Test 1 - Style B - COMPILER WONT ALLOW THIS AND WANTS YOU TO CHANGE IT
      *  - Code never reaches the assertion line, would need a try-catch clause with assertion in catch clause
      *  - SneakyThrows makes it so you don't need to handle the exception in the code nor in the method signature.
      *  - PROBLEM: Even when you have SneakyThrows,  you still need to put a try-catch around the "negative test" to
@@ -82,10 +83,11 @@ public class ObjectMapperParserTest {
         try {
             myObject = objectMapperParser.throwJsonMappingException();
         } catch (JsonMappingException e) {
-            assertNull(myObject, "Don't DO this.");
+            assertNull(myObject, "I expected this.");
             return;
         }
-        assertNotNull(myObject, "Test did not pass.");
+        fail("Did not have expected JsonMappingException");
+        //assertNull(myObject, "Fail-safe assertion is necessary here.");
     }
 
     /** Test 4 - Style D - GOOD PRACTICE
