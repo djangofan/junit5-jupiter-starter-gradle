@@ -152,6 +152,8 @@ public class ObjectMapperParserTest {
             });
             // } catch (Exception e) {
             //     when using a try-catch, compiler will try to make you put a throws clause on signature because of objectmapper
+            //       if you do then get an error, the error is not related to the actual test, but instead the setup.
+            //       Junit5 Assertions.assertDoesNotThrow handles this in a more explicit way
             // }
             assertEquals(thrown.getMessage(), "Forced JsonMappingException.");
         });
