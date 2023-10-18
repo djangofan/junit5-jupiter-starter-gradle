@@ -118,7 +118,7 @@ public class ObjectMapperParserTest {
         try {
             result = objectMapperParser.parseJson(validJson);
         } catch (Exception e) {
-            System.err.println("ERROR: " + e.getMessage());
+            fail("ERROR: " + e.getMessage()); // does not show line number source of error
         }
       assertEquals(result.getAge(), 30);
     }
